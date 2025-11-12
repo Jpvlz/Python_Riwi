@@ -1,35 +1,51 @@
-
 listaNotas = []
 
-def Imprimir ():
-    print(f"\nTu nota es:\n")
-    for i, nota in enumerate(listaNotas, start = 1):
-        print(f"Nota {i}. {nota}")
+def Imprimir():
+    print("\nTus notas son:\n")
+    for i, nota in enumerate(listaNotas, start=1):
+        print(f"Nota {i}: {nota}")
+    print()
     return
 
-def CalcularPromedio ():
-    suma = sum(listaNotas)
-    if suma >= 0 and suma <= 49:
-        promedio = "Reprobado"
-        print(f"""Tus notas son {Imprimir ()}
-Tu promedio es {suma} - {promedio}""")
+def CalcularPromedio():
+    if len(listaNotas) == 0:
+        print("No hay notas registradas.\n")
+        return
+
+    promedio = sum(listaNotas) / len(listaNotas)
+
+    if promedio >= 90:
+        resultado = "Excelente"
+    elif promedio >= 60:
+        resultado = "Aprobado"
+    else:
+        resultado = "Reprobado"
+
+    Imprimir()
+    print(f"Tu promedio es: {promedio:.2f}")
+    print(f"Clasificación: {resultado}\n")
     return
 
 while True:
-    nota = float(input("Ingresa una nota:\n"))
+    nota = float(input("Ingresa una nota (0 a 100):\n"))
     listaNotas.append(nota)
-    opcion = int(input("""\nDesea Ingresar otra nota?
-Ingrese 1 para continuar
-Ingrese 2 para salir
-Ingrese 3 para imprimir las notas
-Ingrese 4 para ver la calificacion\n"""))
-    if opcion == 2:
+
+    opcion = int(input("""
+¿Qué deseas hacer?
+1. Ingresar otra nota
+2. Imprimir notas
+3. Calcular clasificación
+4. Salir
+--> """))
+
+    if opcion == 1:
+        continue
+    elif opcion == 2:
         Imprimir()
-        break
-
-    if opcion == 3:
-        Imprimir()
-
-
-    if opcion == 4:
+    elif opcion == 3:
         CalcularPromedio()
+    elif opcion == 4:
+        print("\nSaliendo del programa...")
+        break
+    else:
+        print("Opción inválida, intenta nuevamente.\n")
